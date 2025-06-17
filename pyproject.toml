@@ -12,6 +12,8 @@ dependencies = [
     "click (>=8.2.1,<9.0.0)"
 ]
 
+[project.scripts]
+opentrace = "perfetto_extras.opentrace:opentrace"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
