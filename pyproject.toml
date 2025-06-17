@@ -1,9 +1,9 @@
 [project]
 name = "perfetto_extras"
-version = "0.2.1"
+version = "0.2.2"
 description = ""
 authors = [
-    {name = "liumoulu"}
+    { name = "merlotliu", email = "meetlouisliu@163.com" },
 ]
 readme = "README.md"
 requires-python = ">=3.11"
