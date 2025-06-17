@@ -6,6 +6,7 @@
 
 - **trace_events**：便捷生成符合 Perfetto 规范的 trace 事件，可自定义进程、线程、事件类型等。
 - **opentrace**：一键在浏览器中打开本地 trace 文件，自动本地 HTTP 服务并跳转至 [ui.perfetto.dev](https://ui.perfetto.dev)。
+- **命令行工具**：安装后可直接使用 `opentrace` 命令，无需再写 python 脚本。
 
 ## 安装
 
@@ -42,10 +43,14 @@ with open("my_trace.json", "w") as f:
 
 ### 2. 浏览器可视化 Trace 文件
 
+#### 方式一：直接用命令行工具（推荐）
+
 ```bash
-poetry run python -m perfetto_extras.opentrace my_trace.json
+opentrace my_trace.json
 ```
-或
+
+#### 方式二：用 python -m 方式
+
 ```bash
 python -m perfetto_extras.opentrace my_trace.json
 ```
