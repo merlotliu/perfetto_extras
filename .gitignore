@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Poetry
+poetry.lock
+
+# VSCode
+.vscode/
+
+# macOS
+.DS_Store
+
+# 环境
+.env
+.venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# PyCharm
+.idea/
+
+# 测试
+.coverage
+htmlcov/
+
+# 临时文件
+*.log
+*.tmp 
