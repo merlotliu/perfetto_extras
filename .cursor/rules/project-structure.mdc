@@ -1,0 +1,11 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# 项目结构说明
+
+- 主包目录为 [perfetto_extras/](mdc:perfetto_extras/)，包含核心功能模块。
+- 示例代码位于 [example/](mdc:example/)，用于演示包的用法。
+- 项目配置和依赖管理文件为 [pyproject.toml](mdc:pyproject.toml)。
+- 推荐从项目根目录运行相关命令，确保包的正确导入和依赖加载。

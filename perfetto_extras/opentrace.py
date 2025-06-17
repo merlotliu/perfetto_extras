@@ -1,7 +1,13 @@
+# -*- coding: utf-8 -*-
+"""
+Open trace in browser.
+"""
+
 import http.server
 import os
 import socketserver
 import webbrowser
+import click
 
 # HTTP Server used to open the trace in the browser.
 class HttpHandler(http.server.SimpleHTTPRequestHandler):
@@ -56,3 +62,12 @@ def open_trace_in_browser(
         httpd.allow_origin = origin
         while httpd.fname_get_completed is None:
             httpd.handle_request()
+
+@click.command()
+@click.argument("path", type=click.Path(exists=True))
+def opentrace(path: str):
+    """Open trace in browser."""
+    open_trace_in_browser(path)
+
+if __name__ == "__main__":
+    opentrace()

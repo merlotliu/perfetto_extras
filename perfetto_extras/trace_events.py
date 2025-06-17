@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
+"""
+Trace events.
+"""
+
 from typing import List
 import datetime
 from enum import Enum
