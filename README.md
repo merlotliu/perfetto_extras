@@ -7,6 +7,7 @@
 ## 特性
 
 - **trace_events**：便捷生成符合 Perfetto 规范的 trace 事件，可自定义进程、线程、事件类型等。
+- **批量事件接口**：支持批量添加 counter、instant、complete 等多种 trace 事件，适合大规模数据写入。
 - **opentrace**：一键在浏览器中打开本地 trace 文件，自动本地 HTTP 服务并跳转至 [ui.perfetto.dev](https://ui.perfetto.dev)。
 - **命令行工具**：安装后可直接使用 `opentrace` 命令，无需再写 python 脚本。
 
@@ -47,7 +48,60 @@ with open("my_trace.json", "w") as f:
     f.write(t.dumps(indent=2, ensure_ascii=False))
 ```
 
-### 2. 浏览器可视化 Trace 文件
+### 2. 批量添加 Trace 事件（推荐）
+
+```python
+from perfetto_extras import trace_events
+
+t = trace_events.Trace()
+
+# 批量添加 counter 事件
+t.add_batch_counter_events(
+    process_name="CounterDemo",
+    category="Counter",
+    name_prefix="Counter",
+    timestamps=[1000, 2000, 3000],
+    values_list=[
+        {"cat": 2, "dog": 4},
+        {"cat": 3, "dog": 5},
+        {"cat": 4, "dog": 6}
+    ]
+)
+
+# 批量添加 instant 事件
+t.add_batch_instant_events(
+    process_name="InstantDemo",
+    process_category="InstantCat",
+    thread_name="Thread-1",
+    thread_category="ThreadCat",
+    timestamps=[1100, 2100, 3100],
+    args_list=[
+        {"event": "A"},
+        {"event": "B"},
+        {"event": "C"}
+    ]
+)
+
+# 批量添加 complete 事件
+t.add_batch_complete_events(
+    process_name="CompleteDemo",
+    process_category="CompleteCat",
+    thread_name="Thread-2",
+    thread_category="ThreadCat",
+    timestamps=[1200, 2200, 3200],
+    durations=[50, 60, 70],
+    args_list=[
+        {"task": "X"},
+        {"task": "Y"},
+        {"task": "Z"}
+    ]
+)
+
+with open("batch_trace.json", "w") as f:
+    f.write(t.dumps(indent=2, ensure_ascii=False))
+```
+
+### 3. 浏览器可视化 Trace 文件
 
 #### 方式一：直接用命令行工具（推荐）
 
