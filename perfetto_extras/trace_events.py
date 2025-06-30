@@ -465,7 +465,8 @@ class Trace:
         category: str,
         name_prefix: str,
         timestamps: list,
-        values_list: list
+        values_list: list,
+        ts_unit: TimeStampUnit = TimeStampUnit.MS
     ):
         """
         批量添加 counter 事件到指定进程轨迹。
@@ -481,7 +482,8 @@ class Trace:
             process_track.add_counter_event(
                 name=name_prefix,
                 ts=ts,
-                args=values
+                args=values,
+                ts_unit=ts_unit
             )
 
     def add_batch_instant_events(
@@ -492,7 +494,8 @@ class Trace:
         thread_category: str,
         timestamps: list,
         args_list: list,
-        scope=Scope.THREAD
+        scope=Scope.THREAD,
+        ts_unit: TimeStampUnit = TimeStampUnit.MS
     ):
         """
         批量添加 instant 事件到指定进程下的线程轨迹。
@@ -516,7 +519,8 @@ class Trace:
                 name=thread_name,
                 ts=ts,
                 args=args,
-                scope=scope
+                scope=scope,
+                ts_unit=ts_unit
             )
 
     def add_batch_complete_events(
@@ -527,7 +531,9 @@ class Trace:
         thread_category: str,
         timestamps: list,
         durations: list,
-        args_list: list
+        args_list: list,
+        ts_unit: TimeStampUnit = TimeStampUnit.MS,
+        duration_unit: TimeStampUnit = TimeStampUnit.MS
     ):
         """
         批量添加 complete 事件到指定进程下的线程轨迹。
@@ -550,7 +556,8 @@ class Trace:
             thread_track.add_complete_event(
                 name=thread_name,
                 ts=ts,
-                duration_us=dur,
-                args=args
+                duration_us=dur * duration_unit.value,
+                args=args,
+                ts_unit=ts_unit
             )
 
