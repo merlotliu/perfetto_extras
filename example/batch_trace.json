@@ -22,8 +22,8 @@
       "pid": 1,
       "tid": 0,
       "args": {
-        "cat": "2",
-        "dog": "4"
+        "cat": 2,
+        "dog": 4
       }
     },
     {
@@ -34,8 +34,8 @@
       "pid": 1,
       "tid": 0,
       "args": {
-        "cat": "3",
-        "dog": "5"
+        "cat": 3,
+        "dog": 5
       }
     },
     {
@@ -46,84 +46,15 @@
       "pid": 1,
       "tid": 0,
       "args": {
-        "cat": "4",
-        "dog": "6"
+        "cat": 4,
+        "dog": 6
       }
     },
     {
       "name": "process_name",
-      "cat": "Complete",
+      "cat": "InstantCat",
       "ph": "M",
       "pid": 2,
-      "tid": 0,
-      "args": {
-        "name": "CompleteDemo"
-      }
-    },
-    {
-      "name": "thread_name",
-      "cat": "Complete",
-      "ph": "M",
-      "pid": 2,
-      "tid": 1,
-      "args": {
-        "name": "CompleteThread"
-      }
-    },
-    {
-      "name": "Complete",
-      "cat": "Complete",
-      "ph": "X",
-      "ts": 1000,
-      "dur": 1000,
-      "pid": 2,
-      "tid": 1,
-      "args": {
-        "name": "Complete1",
-        "value": 100
-      }
-    },
-    {
-      "name": "Complete",
-      "cat": "Complete",
-      "ph": "X",
-      "ts": 3000,
-      "dur": 3000,
-      "pid": 2,
-      "tid": 1,
-      "args": {
-        "name": "Complete3",
-        "value": 300
-      }
-    },
-    {
-      "name": "thread_name",
-      "cat": "Complete",
-      "ph": "M",
-      "pid": 2,
-      "tid": 2,
-      "args": {
-        "name": "CompleteThread"
-      }
-    },
-    {
-      "name": "Complete",
-      "cat": "Complete",
-      "ph": "X",
-      "ts": 2000,
-      "dur": 2000,
-      "pid": 2,
-      "tid": 2,
-      "args": {
-        "name": "Complete2",
-        "value": 200
-      }
-    },
-    {
-      "name": "process_name",
-      "cat": "ProcessInstant",
-      "ph": "M",
-      "pid": 3,
       "tid": 0,
       "args": {
         "name": "InstantDemo"
@@ -131,48 +62,104 @@
     },
     {
       "name": "thread_name",
-      "cat": "ThreadInstant",
+      "cat": "ThreadCat",
       "ph": "M",
-      "pid": 3,
+      "pid": 2,
       "tid": 1,
       "args": {
-        "name": "InstantThread"
+        "name": "Thread-1"
       }
     },
     {
-      "name": "Instant",
-      "cat": "ThreadInstant",
+      "name": "Thread-1",
+      "cat": "ThreadCat",
       "ph": "i",
-      "ts": 1000,
-      "pid": 3,
+      "ts": 1100,
+      "pid": 2,
       "tid": 1,
       "s": "t",
       "args": {
-        "name": "Instant1",
-        "value": 100
+        "event": "A"
+      }
+    },
+    {
+      "name": "Thread-1",
+      "cat": "ThreadCat",
+      "ph": "i",
+      "ts": 2100,
+      "pid": 2,
+      "tid": 1,
+      "s": "t",
+      "args": {
+        "event": "B"
+      }
+    },
+    {
+      "name": "Thread-1",
+      "cat": "ThreadCat",
+      "ph": "i",
+      "ts": 3100,
+      "pid": 2,
+      "tid": 1,
+      "s": "t",
+      "args": {
+        "event": "C"
+      }
+    },
+    {
+      "name": "process_name",
+      "cat": "CompleteCat",
+      "ph": "M",
+      "pid": 3,
+      "tid": 0,
+      "args": {
+        "name": "CompleteDemo"
       }
     },
     {
       "name": "thread_name",
-      "cat": "Instant",
+      "cat": "ThreadCat",
       "ph": "M",
       "pid": 3,
-      "tid": 2,
+      "tid": 1,
       "args": {
-        "name": "InstantThread"
+        "name": "Thread-2"
       }
     },
     {
-      "name": "Instant",
-      "cat": "Instant",
-      "ph": "i",
-      "ts": 2000,
+      "name": "Thread-2",
+      "cat": "ThreadCat",
+      "ph": "X",
+      "ts": 1200,
+      "dur": 50,
       "pid": 3,
-      "tid": 2,
-      "s": "t",
+      "tid": 1,
       "args": {
-        "name": "Instant2",
-        "value": 200
+        "task": "X"
+      }
+    },
+    {
+      "name": "Thread-2",
+      "cat": "ThreadCat",
+      "ph": "X",
+      "ts": 2200,
+      "dur": 60,
+      "pid": 3,
+      "tid": 1,
+      "args": {
+        "task": "Y"
+      }
+    },
+    {
+      "name": "Thread-2",
+      "cat": "ThreadCat",
+      "ph": "X",
+      "ts": 3200,
+      "dur": 70,
+      "pid": 3,
+      "tid": 1,
+      "args": {
+        "task": "Z"
       }
     }
   ]

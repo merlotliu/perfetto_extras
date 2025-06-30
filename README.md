@@ -1,5 +1,7 @@
 # perfetto_extras
 
+[![PyPI version](https://img.shields.io/pypi/v/perfetto_extras.svg)](https://pypi.org/project/perfetto_extras/)  
+
 基于 Perfetto 的 Python 工具包，提供 trace 事件生成与浏览器可视化能力。
 
 ## 特性
@@ -7,6 +9,10 @@
 - **trace_events**：便捷生成符合 Perfetto 规范的 trace 事件，可自定义进程、线程、事件类型等。
 - **opentrace**：一键在浏览器中打开本地 trace 文件，自动本地 HTTP 服务并跳转至 [ui.perfetto.dev](https://ui.perfetto.dev)。
 - **命令行工具**：安装后可直接使用 `opentrace` 命令，无需再写 python 脚本。
+
+## 当前版本
+
+**0.3.0**
 
 ## 安装
 

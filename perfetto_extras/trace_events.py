@@ -459,3 +459,98 @@ class Trace:
         self.traceEventsList.append(traceEvents)
         return traceEvents
 
+    def add_batch_counter_events(
+        self,
+        process_name: str,
+        category: str,
+        name_prefix: str,
+        timestamps: list,
+        values_list: list
+    ):
+        """
+        批量添加 counter 事件到指定进程轨迹。
+        """
+        process_track = None
+        for track in self.traceEventsList:
+            if isinstance(track, ProcessTrack) and track.name == process_name:
+                process_track = track
+                break
+        if process_track is None:
+            process_track = self.create_process_track(process_name, category)
+        for ts, values in zip(timestamps, values_list):
+            process_track.add_counter_event(
+                name=name_prefix,
+                ts=ts,
+                args=values
+            )
+
+    def add_batch_instant_events(
+        self,
+        process_name: str,
+        process_category: str,
+        thread_name: str,
+        thread_category: str,
+        timestamps: list,
+        args_list: list,
+        scope=Scope.THREAD
+    ):
+        """
+        批量添加 instant 事件到指定进程下的线程轨迹。
+        """
+        process_track = None
+        for track in self.traceEventsList:
+            if isinstance(track, ProcessTrack) and track.name == process_name:
+                process_track = track
+                break
+        if process_track is None:
+            process_track = self.create_process_track(process_name, process_category)
+        thread_track = None
+        for t in process_track.thread_tracks:
+            if t.name == thread_name:
+                thread_track = t
+                break
+        if thread_track is None:
+            thread_track = process_track.create_thread_track(thread_name, thread_category)
+        for ts, args in zip(timestamps, args_list):
+            thread_track.add_instant_event(
+                name=thread_name,
+                ts=ts,
+                args=args,
+                scope=scope
+            )
+
+    def add_batch_complete_events(
+        self,
+        process_name: str,
+        process_category: str,
+        thread_name: str,
+        thread_category: str,
+        timestamps: list,
+        durations: list,
+        args_list: list
+    ):
+        """
+        批量添加 complete 事件到指定进程下的线程轨迹。
+        """
+        process_track = None
+        for track in self.traceEventsList:
+            if isinstance(track, ProcessTrack) and track.name == process_name:
+                process_track = track
+                break
+        if process_track is None:
+            process_track = self.create_process_track(process_name, process_category)
+        thread_track = None
+        for t in process_track.thread_tracks:
+            if t.name == thread_name:
+                thread_track = t
+                break
+        if thread_track is None:
+            thread_track = process_track.create_thread_track(thread_name, thread_category)
+        for ts, dur, args in zip(timestamps, durations, args_list):
+            thread_track.add_complete_event(
+                name=thread_name,
+                ts=ts,
+                duration_us=dur,
+                args=args
+            )
+

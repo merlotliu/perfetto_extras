@@ -36,6 +36,12 @@ if __name__ == "__main__":
         duration_us=1000,
         args={"name": "Complete1", "value": 100}
     )
+    complete_thread1.add_complete_event(
+        name="Complete",
+        ts=3000,
+        duration_us=3000,
+        args={"name": "Complete3", "value": 300}
+    )
     complete_thread2 = complete_events.create_thread_track("CompleteThread", "Complete")
     complete_thread2.add_complete_event(
         name="Complete",
@@ -45,21 +51,15 @@ if __name__ == "__main__":
     )
 
     # Instant events
-    instant_events = trace.create_process_track("InstantDemo", "Instant")
-    instant_thread1 = instant_events.create_thread_track("InstantThread", "Instant")
+    instant_events = trace.create_process_track("InstantDemo", "ProcessInstant")
+    instant_thread1 = instant_events.create_thread_track("InstantThread", "ThreadInstant1")
     instant_thread1.add_instant_event(
         name="Instant",
         ts=1000,
         args={"name": "Instant1", "value": 100}
     )
-    complete_thread1.add_complete_event(
-        name="Complete",
-        ts=3000,
-        duration_us=3000,
-        args={"name": "Complete3", "value": 300}
-    )
     
-    instant_thread2 = instant_events.create_thread_track("InstantThread", "Instant")
+    instant_thread2 = instant_events.create_thread_track("InstantThread", "ThreadInstant2")
     instant_thread2.add_instant_event(
         name="Instant",
         ts=2000,
