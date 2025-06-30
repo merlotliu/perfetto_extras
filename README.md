@@ -10,6 +10,7 @@
 - **批量事件接口**：支持批量添加 counter、instant、complete 等多种 trace 事件，适合大规模数据写入。
 - **opentrace**：一键在浏览器中打开本地 trace 文件，自动本地 HTTP 服务并跳转至 [ui.perfetto.dev](https://ui.perfetto.dev)。
 - **命令行工具**：安装后可直接使用 `opentrace` 命令，无需再写 python 脚本。
+- **完善的文档提示**：所有对外 API 均已添加标准 docstring，支持 IDE 悬停查看参数和说明。
 
 ## 当前版本
 

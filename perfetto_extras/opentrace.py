@@ -38,7 +38,14 @@ def open_trace_in_browser(
     open_browser: bool = True,
     origin: str = "https://ui.perfetto.dev",
 ):
-    """Open trace in browser."""
+    """
+    在浏览器中打开 trace 文件，自动启动本地 HTTP 服务并跳转到 Perfetto UI。
+
+    Args:
+        path (str): 本地 trace 文件路径。
+        open_browser (bool): 是否自动打开浏览器，默认 True。
+        origin (str): 允许的跨域来源，默认 https://ui.perfetto.dev。
+    """
     # We reuse the HTTP+RPC port because it's the only one allowed by the CSP.
     if path is None or not os.path.exists(path):
         print(f"Trace file not found: {path}")
@@ -66,7 +73,12 @@ def open_trace_in_browser(
 @click.command()
 @click.argument("path", type=click.Path(exists=True))
 def opentrace(path: str):
-    """Open trace in browser."""
+    """
+    命令行入口：在浏览器中打开指定 trace 文件。
+
+    Args:
+        path (str): 本地 trace 文件路径。
+    """
     open_trace_in_browser(path)
 
 if __name__ == "__main__":

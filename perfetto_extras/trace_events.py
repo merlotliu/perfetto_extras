@@ -395,9 +395,11 @@ class Trace:
         traceEventsList=[]
     ):
         """
-        If provided displayTimeUnit is a string that specifies in which unit timestamps 
-        should be displayed. This supports values of "ms" or "ns". By default this is 
-        value is "ms".
+        初始化 Trace 对象。
+
+        Args:
+            displayTimeUnit (str): 显示时间单位，支持 "ms" 或 "ns"，默认 "ms"。
+            traceEventsList (list): 初始 trace 事件列表。
         """
         self.displayTimeUnit = displayTimeUnit
 
@@ -417,7 +419,10 @@ class Trace:
     
     def generate_unique_pid(self) -> int:
         """
-        Generate a unique pid.
+        生成唯一的进程 pid。
+
+        Returns:
+            int: 新的唯一 pid。
         """
         pid = self._auto_pid
         self._auto_pid += 1
@@ -425,13 +430,22 @@ class Trace:
 
     def flatten(self) -> List[dict]:
         """
-        Flatten the trace events object list into a list of trace events.
+        将 traceEventsList 展平成 traceEvents 列表。
+
+        Returns:
+            List[dict]: 所有 trace 事件的列表。
         """
         for events in self.traceEventsList:
             self.traceEvents.extend(events.to_dict())
         return self.traceEvents
 
     def to_dict(self) -> dict:
+        """
+        转换为字典格式。
+
+        Returns:
+            dict: trace 的完整字典表示。
+        """
         return {
             "displayTimeUnit": self.displayTimeUnit,
             "otherData": self.otherData,
@@ -439,19 +453,45 @@ class Trace:
         }
 
     def dumps(self, **kwargs) -> str:
+        """
+        序列化 trace 为 JSON 字符串。
+
+        Args:
+            **kwargs: 传递给 json.dumps 的参数。
+        Returns:
+            str: JSON 字符串。
+        """
         import json
         return json.dumps(self.to_dict(), **kwargs)
     
     def dump(self, **kwargs) -> None:
+        """
+        序列化 trace 并写入文件。
+
+        Args:
+            **kwargs: 传递给 json.dump 的参数。
+        """
         import json
         json.dump(self.to_dict(), **kwargs)
     
     def add_trace_events(self, trace_events: List[dict]):
+        """
+        直接添加原始 trace 事件。
+
+        Args:
+            trace_events (List[dict]): 事件字典列表。
+        """
         self.traceEvents.extend(trace_events)
 
     def create_process_track(self, name: str, category: str) -> ProcessTrack:
         """
-        Create a process track with a unique pid.
+        创建一个新的进程轨迹。
+
+        Args:
+            name (str): 进程名称。
+            category (str): 进程类别。
+        Returns:
+            ProcessTrack: 新建的进程轨迹对象。
         """
         traceEvents = ProcessTrack(
             name=name, category=category, pid=self.generate_unique_pid()
@@ -470,6 +510,14 @@ class Trace:
     ):
         """
         批量添加 counter 事件到指定进程轨迹。
+
+        Args:
+            process_name (str): 进程名称。
+            category (str): 事件类别。
+            name_prefix (str): counter 名称前缀。
+            timestamps (list): 时间戳列表。
+            values_list (list): 每个时间点的 counter 字典列表。
+            ts_unit (TimeStampUnit): 时间戳单位，默认毫秒。
         """
         process_track = None
         for track in self.traceEventsList:
@@ -499,6 +547,16 @@ class Trace:
     ):
         """
         批量添加 instant 事件到指定进程下的线程轨迹。
+
+        Args:
+            process_name (str): 进程名称。
+            process_category (str): 进程类别。
+            thread_name (str): 线程名称。
+            thread_category (str): 线程类别。
+            timestamps (list): 时间戳列表。
+            args_list (list): 每个事件的参数字典列表。
+            scope (Scope): 事件作用域，默认线程级别。
+            ts_unit (TimeStampUnit): 时间戳单位，默认毫秒。
         """
         process_track = None
         for track in self.traceEventsList:
@@ -537,6 +595,17 @@ class Trace:
     ):
         """
         批量添加 complete 事件到指定进程下的线程轨迹。
+
+        Args:
+            process_name (str): 进程名称。
+            process_category (str): 进程类别。
+            thread_name (str): 线程名称。
+            thread_category (str): 线程类别。
+            timestamps (list): 时间戳列表。
+            durations (list): 每个事件的持续时间列表。
+            args_list (list): 每个事件的参数字典列表。
+            ts_unit (TimeStampUnit): 时间戳单位，默认毫秒。
+            duration_unit (TimeStampUnit): 持续时间单位，默认毫秒。
         """
         process_track = None
         for track in self.traceEventsList:
