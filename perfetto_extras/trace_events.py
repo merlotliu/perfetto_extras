@@ -541,6 +541,7 @@ class Trace:
         thread_name: str,
         thread_category: str,
         timestamps: list,
+        names: list,
         args_list: list,
         scope=Scope.THREAD,
         ts_unit: TimeStampUnit = TimeStampUnit.MS
@@ -554,6 +555,7 @@ class Trace:
             thread_name (str): 线程名称。
             thread_category (str): 线程类别。
             timestamps (list): 时间戳列表。
+            names (list): 每个事件的名称列表。
             args_list (list): 每个事件的参数字典列表。
             scope (Scope): 事件作用域，默认线程级别。
             ts_unit (TimeStampUnit): 时间戳单位，默认毫秒。
@@ -572,9 +574,9 @@ class Trace:
                 break
         if thread_track is None:
             thread_track = process_track.create_thread_track(thread_name, thread_category)
-        for ts, args in zip(timestamps, args_list):
+        for ts, name, args in zip(timestamps, names, args_list):
             thread_track.add_instant_event(
-                name=thread_name,
+                name=name,
                 ts=ts,
                 args=args,
                 scope=scope,
@@ -588,6 +590,7 @@ class Trace:
         thread_name: str,
         thread_category: str,
         timestamps: list,
+        names: list,
         durations: list,
         args_list: list,
         ts_unit: TimeStampUnit = TimeStampUnit.MS,
@@ -602,6 +605,7 @@ class Trace:
             thread_name (str): 线程名称。
             thread_category (str): 线程类别。
             timestamps (list): 时间戳列表。
+            names (list): 每个事件的名称列表。
             durations (list): 每个事件的持续时间列表。
             args_list (list): 每个事件的参数字典列表。
             ts_unit (TimeStampUnit): 时间戳单位，默认毫秒。
@@ -621,9 +625,9 @@ class Trace:
                 break
         if thread_track is None:
             thread_track = process_track.create_thread_track(thread_name, thread_category)
-        for ts, dur, args in zip(timestamps, durations, args_list):
+        for ts, name, dur, args in zip(timestamps, names, durations, args_list):
             thread_track.add_complete_event(
-                name=thread_name,
+                name=name,
                 ts=ts,
                 duration_us=dur * duration_unit.value,
                 args=args,

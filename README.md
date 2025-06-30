@@ -7,7 +7,7 @@
 ## 特性
 
 - **trace_events**：便捷生成符合 Perfetto 规范的 trace 事件，可自定义进程、线程、事件类型等。
-- **批量事件接口**：支持批量添加 counter、instant、complete 等多种 trace 事件，适合大规模数据写入。
+- **批量事件接口**：支持批量添加 counter、instant、complete 等多种 trace 事件，适合大规模数据写入。instant/complete 批量接口支持为每个事件单独指定 name。
 - **opentrace**：一键在浏览器中打开本地 trace 文件，自动本地 HTTP 服务并跳转至 [ui.perfetto.dev](https://ui.perfetto.dev)。
 - **命令行工具**：安装后可直接使用 `opentrace` 命令，无需再写 python 脚本。
 - **完善的文档提示**：所有对外 API 均已添加标准 docstring，支持 IDE 悬停查看参数和说明。
@@ -69,7 +69,7 @@ t.add_batch_counter_events(
     ]
 )
 
-# 批量添加 instant 事件
+# 批量添加 instant 事件（支持 names 参数）
 t.add_batch_instant_events(
     process_name="InstantDemo",
     process_category="InstantCat",
@@ -80,10 +80,11 @@ t.add_batch_instant_events(
         {"event": "A"},
         {"event": "B"},
         {"event": "C"}
-    ]
+    ],
+    names=["eventA", "eventB", "eventC"]  # 可为每个事件单独指定 name
 )
 
-# 批量添加 complete 事件
+# 批量添加 complete 事件（支持 names 参数）
 t.add_batch_complete_events(
     process_name="CompleteDemo",
     process_category="CompleteCat",
@@ -95,7 +96,8 @@ t.add_batch_complete_events(
         {"task": "X"},
         {"task": "Y"},
         {"task": "Z"}
-    ]
+    ],
+    names=["taskX", "taskY", "taskZ"]  # 可为每个事件单独指定 name
 )
 
 with open("batch_trace.json", "w") as f:
