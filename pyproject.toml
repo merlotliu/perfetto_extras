@@ -1,6 +1,6 @@
 [project]
 name = "perfetto_extras"
-version = "0.3.3"
+version = "0.3.4"
 description = ""
 authors = [
     { name = "merlotliu", email = "meetlouisliu@163.com" },
@@ -9,7 +9,7 @@ readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "protobuf (==5.29.3)",
-    "click (>=8.2.1,<9.0.0)"
+    "click (>=7.0)"
 ]
 
 [project.scripts]
